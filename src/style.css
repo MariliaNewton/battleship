@@ -1,0 +1,178 @@
+@font-face {
+  font-family: retro;
+  src: url(assets/RetroGaming.ttf);
+}
+
+* {
+  font-family: retro, Times, serif;
+}
+
+:root {
+  --main-blue: #000078;
+  --grid-blue: #0000a8;
+  --main-grey: #a8a8a8;
+  --dark-grey: #545454;
+  /* --dark-grey-transparent: #6f232342; */
+  --light-grey: #fcfcfc;
+  --black: #000;
+  --green: #54fc54;
+  --dark-green: #0c9f03;
+  --yellow: #bdbd75;
+}
+
+html {
+  font-size: 12px;
+}
+
+body {
+  background-color: var(--main-blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.header > div {
+  text-align: center;
+  font-size: 1.5rem;
+  border: 0.8rem solid var(--main-grey);
+  color: var(--yellow);
+  padding: 0.5rem 0;
+}
+
+.light {
+  width: 2rem;
+  height: 1rem;
+  background-color: var(--main-grey);
+  position: relative;
+}
+
+.header > :not(.light) {
+  width: 12rem;
+  background-color: var(--grid-blue);
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  background-color: #000;
+  height: 1.75rem;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--main-grey);
+  z-index: -1;
+}
+
+.light > div {
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.green-light-holder {
+  height: 1.6rem;
+  width: 1.6rem;
+  background-color: #000;
+  border: 0.1rem solid var(--dark-grey);
+}
+
+.green-light {
+  height: 1rem;
+  width: 1rem;
+  background-color: var(--green);
+  border: 0.1rem solid var(--dark-green);
+  z-index: 100;
+  visibility: hidden;
+}
+
+.green-light.active {
+  visibility: visible;
+}
+
+.main {
+  display: flex;
+  gap: 8rem;
+  justify-content: space-evenly;
+}
+
+.square {
+  height: 100% /10;
+  aspect-ratio: 1;
+  background-color: var(--grid-blue);
+  border: 0.01rem solid var(--main-grey);
+}
+
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  width: 28rem;
+  border: 0.4rem solid var(--main-grey);
+  border-radius: 0.3rem;
+  margin-left: 2.5rem;
+}
+
+.board-one,
+.board-two {
+  position: relative;
+}
+
+.coords {
+  font-size: 1.2rem;
+  color: var(--yellow);
+  display: flex;
+  gap: 1.9rem;
+}
+
+.coords-numbers {
+  margin-bottom: 1.25rem;
+  display: flex;
+  margin-left: 3.65rem;
+}
+
+.coords-letters {
+  position: absolute;
+  flex-direction: column;
+  gap: 1.27rem;
+  left: 0rem;
+  top: 3.65rem;
+}
+
+.footer {
+  display: flex;
+  gap: 2rem;
+}
+
+.btn-footer {
+  font-size: 1.5rem;
+  background-color: var(--main-grey);
+  margin-top: 2rem;
+  width: 9rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+
+  border: 0.3rem solid;
+
+  border-color: var(--light-grey) var(--dark-grey) var(--dark-grey)
+    var(--light-grey);
+
+  transition: all 0.12s;
+}
+
+.btn-footer:active {
+  transition: all 0.12s;
+
+  border-color: var(--dark-grey) var(--light-grey) var(--light-grey)
+    var(--dark-grey);
+}

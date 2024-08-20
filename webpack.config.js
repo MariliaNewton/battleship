@@ -9,6 +9,10 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
+  devtool: "eval-source-map",
+  devServer: {
+    watchFiles: ["./src/index.js"],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       title: "Starter File",
