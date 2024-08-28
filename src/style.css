@@ -74,7 +74,6 @@ img.horizontal {
   --grid-blue: #0000a8;
   --main-grey: #a8a8a8;
   --dark-grey: #545454;
-  /* --dark-grey-transparent: #6f232342; */
   --light-grey: #fcfcfc;
   --black: #000;
   --green: #54fc54;
@@ -175,7 +174,6 @@ body {
   background-color: var(--grid-blue);
   border: 0.01rem solid var(--main-grey);
   color: #fcfcfc;
-
   position: relative;
 }
 
