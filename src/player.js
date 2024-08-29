@@ -1,7 +1,7 @@
 export default class Player {
-  constructor(name, board) {
+  constructor(name, gameBoard) {
     this.name = name;
-    this.gameBoard = board;
+    this.gameBoard = gameBoard;
   }
 
   placeShip(ship, startPos, horizontal = false) {
