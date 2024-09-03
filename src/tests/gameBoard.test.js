@@ -113,4 +113,15 @@ describe("Game Board functions", () => {
 
     expect(gameBoard.board[0][0]).toBe(ship1);
   });
+
+  test("Change Ship Direction", () => {
+    gameBoard.placeShip(ship2, [0, 0]);
+    gameBoard.changeShipDirection(ship2, [0, 0], "horizontal");
+
+    expect(gameBoard.board[1][0]).toBe(null);
+    expect(gameBoard.board[2][0]).toBe(null);
+    expect(gameBoard.board[0][0]).toBe(ship2);
+    expect(gameBoard.board[0][1]).toBe(ship2);
+    expect(gameBoard.board[0][2]).toBe(ship2);
+  });
 });

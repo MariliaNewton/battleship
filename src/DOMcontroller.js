@@ -69,6 +69,7 @@ export default class DOMcontroller {
         this.shipSelected.classList[0],
         +this.shipSelected.dataset.length
       );
+
       const row = +e.target.dataset.row;
       const col = +e.target.dataset.col;
 
@@ -121,14 +122,7 @@ export default class DOMcontroller {
     });
 
     btnPlayAgain.addEventListener("click", () => {
-      this.computerBoard = new Gameboard();
-      this.playerBoard = new Gameboard();
-      this.computerPlayer = new ComputerPlayer();
-      this.playerPlaced = false;
-      this.computerPlaced = false;
-      this.shipSelected = "";
-      this.winner = "";
-      this.onGame = false;
+      this.restartVariables();
 
       body.classList.remove("blurred");
       gameOverPopUp.classList.remove("visible");
@@ -146,6 +140,17 @@ export default class DOMcontroller {
 
       this.placeCompShips();
     });
+  }
+
+  restartVariables() {
+    this.computerBoard = new Gameboard();
+    this.playerBoard = new Gameboard();
+    this.computerPlayer = new ComputerPlayer();
+    this.playerPlaced = false;
+    this.computerPlaced = false;
+    this.shipSelected = "";
+    this.winner = "";
+    this.onGame = false;
   }
 
   releaseGame() {

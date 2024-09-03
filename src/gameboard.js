@@ -52,6 +52,17 @@ export default class GameBoard {
     return true;
   }
 
+  changeShipDirection(ship, startPos = "", newDirection) {
+    for (let row = 0; row < 10; row++) {
+      for (let col = 0; col < 10; col++) {
+        this.board[row][col] =
+          this.board[row][col] === ship ? null : this.board[row][col];
+      }
+    }
+    newDirection = newDirection === "horizontal" ? true : false;
+    this.placeShip(ship, startPos, newDirection);
+  }
+
   allShipsSunk() {
     return this.ships.every((ship) => ship.isSunk());
   }
