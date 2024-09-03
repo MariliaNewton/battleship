@@ -1,8 +1,9 @@
 export default class Ship {
-  constructor(name, length, hits = 0) {
+  constructor(name, length, img = "", hits = 0) {
     this.name = name;
     this.length = length;
     this.hits = hits;
+    this.img = img;
   }
 
   hit() {

@@ -19,37 +19,43 @@ img.horizontal {
   left: 0.15rem;
 }
 
-.fire {
+.shot {
   z-index: 300;
   height: 2rem;
   top: 0.4rem;
   left: 0.4rem;
 }
 
-.ship-3 {
+.not-visible {
+  z-index: -100;
+  transition: opacity 2s;
+  opacity: 0.2;
+}
+
+.cruiser {
   height: 8.2rem;
   left: 0.2rem;
 }
 
-.ship-4 {
+.battleship {
   height: 10.8rem;
   left: 0.27rem;
   top: 0.1rem;
 }
 
-.ship-5 {
+.carrier {
   height: 13.75rem;
   top: 0.05rem;
   left: 0.2rem;
 }
 
-.ship-3-2 {
+.submarine {
   height: 8.2rem;
   left: 0.175rem;
   top: 0.05rem;
 }
 
-.ship-2 {
+.destroyer {
   height: 5.2rem;
   left: 0.2rem;
 }
@@ -57,6 +63,11 @@ img.horizontal {
 .parked {
   position: relative;
   cursor: grab;
+}
+
+.taken {
+  opacity: 0.5;
+  cursor: auto;
 }
 
 .parked:active {
@@ -74,6 +85,7 @@ img.horizontal {
   --grid-blue: #0000a8;
   --main-grey: #a8a8a8;
   --dark-grey: #545454;
+  --super-dark-grey: rgb(59, 59, 59);
   --light-grey: #fcfcfc;
   --black: #000;
   --green: #54fc54;
@@ -82,7 +94,7 @@ img.horizontal {
 }
 
 html {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 body {
@@ -92,7 +104,66 @@ body {
   align-items: center;
   justify-content: center;
   gap: 5rem;
-  height: 100vh;
+  min-height: 100vh;
+}
+
+.blurred :not(#unblurred) {
+  filter: blur(0.1rem);
+  cursor: auto;
+}
+
+#unblurred {
+  filter: blur(0px);
+}
+
+.game-over {
+  margin: 0;
+}
+
+.winner {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.play-again {
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  position: fixed;
+  width: 25rem;
+  height: 15rem;
+  background-color: var(--main-grey);
+  border: 0.5rem solid var(--dark-grey);
+  visibility: hidden;
+}
+
+.play-again.visible {
+  visibility: visible;
+}
+
+.play-again button {
+  cursor: pointer;
+  font-size: 1rem;
+  background-color: var(--main-grey);
+  width: 10rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+
+  border: 0.3rem solid;
+
+  border-color: var(--light-grey) var(--dark-grey) var(--dark-grey)
+    var(--light-grey);
+
+  transition: all 0.12s;
+}
+
+.play-again button:active {
+  transition: all 0.12s;
+
+  border-color: var(--dark-grey) var(--light-grey) var(--light-grey)
+    var(--dark-grey);
 }
 
 .header {
@@ -142,6 +213,10 @@ body {
   transform: translate(-50%, -50%);
 }
 
+.header > .announcement {
+  width: 14.5rem;
+}
+
 .green-light-holder {
   height: 1.6rem;
   width: 1.6rem;
@@ -177,6 +252,10 @@ body {
   position: relative;
 }
 
+.active .square:hover {
+  background-color: #a51c1c6e;
+}
+
 .board {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -186,8 +265,8 @@ body {
   margin-left: 2.5rem;
 }
 
-.board-one,
-.board-two {
+.board-player,
+.board-computer {
   position: relative;
 }
 
@@ -239,4 +318,14 @@ body {
 
   border-color: var(--dark-grey) var(--light-grey) var(--light-grey)
     var(--dark-grey);
+}
+
+.btn-footer.unclickable {
+  color: var(--super-dark-grey);
+  opacity: 0.8;
+}
+
+.btn-footer.unclickable:active {
+  border-color: var(--light-grey) var(--dark-grey) var(--dark-grey)
+    var(--light-grey);
 }
