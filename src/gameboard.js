@@ -30,6 +30,7 @@ export default class GameBoard {
 
     if (horizontal) {
       if (col + ship.length > 10) return false;
+
       for (let i = 0; i < ship.length; i++) {
         if (this.board[row][col + i] !== null) return false;
       }
@@ -40,6 +41,7 @@ export default class GameBoard {
 
     if (!horizontal) {
       if (row + ship.length > 10) return false;
+
       for (let i = 0; i < ship.length; i++) {
         if (this.board[row + i][col] !== null) return false;
       }
@@ -60,7 +62,10 @@ export default class GameBoard {
       }
     }
     newDirection = newDirection === "horizontal" ? true : false;
-    this.placeShip(ship, startPos, newDirection);
+
+    this.ships.splice(this.ships.indexOf(ship), 1);
+
+    return this.placeShip(ship, startPos, newDirection);
   }
 
   allShipsSunk() {

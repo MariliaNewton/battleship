@@ -24,6 +24,7 @@ const lightPlayer = document.querySelector(".green-light-player");
 const winnerSign = document.querySelector(".winner");
 const gameOverPopUp = document.querySelector(".play-again");
 const body = document.querySelector("body");
+const ships = document.querySelectorAll(".ship");
 
 // Not sure if needed
 const carrierShip = document.querySelector(".carrier");
@@ -62,6 +63,8 @@ export default class DOMcontroller {
     });
 
     playerBoardEl.addEventListener("click", (e) => {
+      if (e.target.classList.contains("ship") && this.shipSelected === "")
+        this.changeShipDirection(e.target);
       if (!e.target.classList.contains("square")) return;
       if (this.shipSelected === "") return;
 
@@ -77,6 +80,7 @@ export default class DOMcontroller {
 
       const imgShip = this.shipSelected.cloneNode(true);
       imgShip.classList.remove("parked");
+      imgShip.classList.add("ship");
       e.target.appendChild(imgShip);
 
       playerBoardEl.classList.remove("active");
@@ -121,25 +125,29 @@ export default class DOMcontroller {
       }, 1000);
     });
 
-    btnPlayAgain.addEventListener("click", () => {
-      this.restartVariables();
+    [btnPlayAgain, btnExitGame].forEach((btn) =>
+      btn.addEventListener("click", () => {
+        this.restartVariables();
 
-      body.classList.remove("blurred");
-      gameOverPopUp.classList.remove("visible");
-      btnExitGame.classList.remove("unclickable");
+        body.classList.remove("blurred");
+        gameOverPopUp.classList.remove("visible");
+        btnExitGame.classList.remove("unclickable");
+        lightComputer.classList.remove("active");
+        lightPlayer.classList.remove("active");
 
-      this.changeAnnounce("Place Ships!");
+        this.changeAnnounce("Place Ships!");
 
-      squares.forEach((sq) => {
-        sq.innerHTML = "";
-      });
+        squares.forEach((sq) => {
+          sq.innerHTML = "";
+        });
 
-      shipsParked.forEach((ship) => {
-        ship.classList.remove("taken");
-      });
+        shipsParked.forEach((ship) => {
+          ship.classList.remove("taken");
+        });
 
-      this.placeCompShips();
-    });
+        this.placeCompShips();
+      })
+    );
   }
 
   restartVariables() {
@@ -183,6 +191,28 @@ export default class DOMcontroller {
 
       this.computerPlaced = true;
     });
+  }
+
+  changeShipDirection(ship) {
+    const row = +ship.closest(".square").dataset.row;
+    const col = +ship.closest(".square").dataset.col;
+    const shipObj = this.playerBoard.board[row][col];
+
+    if (ship.classList.contains("horizontal")) {
+      if (this.playerBoard.changeShipDirection(shipObj, [row, col], "vertical"))
+        ship.classList.remove("horizontal");
+      else {
+        this.playerBoard.placeShip(shipObj, [row, col], true);
+      }
+    } else {
+      if (
+        this.playerBoard.changeShipDirection(shipObj, [row, col], "horizontal")
+      )
+        ship.classList.add("horizontal");
+      else {
+        this.playerBoard.placeShip(shipObj, [row, col], false);
+      }
+    }
   }
 
   attachShipImgComputer(ship, horizontal, row, col) {

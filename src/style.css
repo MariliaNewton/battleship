@@ -62,16 +62,12 @@ img.horizontal {
 
 .parked {
   position: relative;
-  cursor: grab;
+  cursor: pointer;
 }
 
 .taken {
   opacity: 0.5;
   cursor: auto;
-}
-
-.parked:active {
-  cursor: grabbing;
 }
 
 .ship-parking {
@@ -254,6 +250,11 @@ body {
 
 .active .square:hover {
   background-color: #a51c1c6e;
+  cursor: pointer;
+}
+
+.ship {
+  cursor: pointer;
 }
 
 .board {
